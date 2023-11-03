@@ -19,15 +19,15 @@ public class SellsApplication {
     public CommandLineRunner init(@Autowired ClientRepository clientRepository) {
         return args -> {
             Client client = new Client("Guilherme");
-            clientRepository.insert(client);
+            clientRepository.save(client);
             Client client2 = new Client("João");
-            clientRepository.insert(client2);
+            clientRepository.save(client2);
             client.setName("Guilherme Martins");
 
             List<Client> clients = clientRepository.findAll();
             clients.forEach(c -> {
                 c.setName(c.getName() + " updated");
-                clientRepository.update(c);
+                clientRepository.save(c);
             });
 
             Client clientToDelete = clients.get(0);
