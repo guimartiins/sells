@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS product (
     price NUMERIC(20,2)
 );
 
-CREATE TABLE IF NOT EXISTS "ORDER" (
+CREATE TABLE IF NOT EXISTS "ORDERS" (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     client_id INT REFERENCES client (id),
     created_at TIMESTAMP,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "ORDER" (
 
 CREATE TABLE IF NOT EXISTS order_item (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    order_id INT REFERENCES "ORDER" (id),
+    order_id INT REFERENCES "ORDERS" (id),
     product_id INT REFERENCES product (id),
     quantity INT
 );

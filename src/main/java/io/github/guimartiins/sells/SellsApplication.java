@@ -1,7 +1,9 @@
 package io.github.guimartiins.sells;
 
 import io.github.guimartiins.sells.domain.entity.Client;
+import io.github.guimartiins.sells.domain.entity.Order;
 import io.github.guimartiins.sells.domain.repository.ClientRepository;
+import io.github.guimartiins.sells.domain.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -16,24 +19,22 @@ import java.util.List;
 public class SellsApplication {
 
     @Bean
-    public CommandLineRunner init(@Autowired ClientRepository clientRepository) {
+    public CommandLineRunner init(@Autowired ClientRepository clientRepository, @Autowired OrderRepository orderRepository) {
         return args -> {
             Client client = new Client("Guilherme");
             clientRepository.save(client);
-            Client client2 = new Client("João");
-            clientRepository.save(client2);
-            client.setName("Guilherme Martins");
 
-            List<Client> clients = clientRepository.findAll();
-            clients.forEach(c -> {
-                c.setName(c.getName() + " updated");
-                clientRepository.save(c);
-            });
+            Order order = new Order();
+            order.setClient(client);
+            order.setTotal(BigDecimal.valueOf(100));
 
-            Client clientToDelete = clients.get(0);
-            clientRepository.delete(clientToDelete);
+            orderRepository.save(order);
 
-            clientRepository.findAll().forEach(System.out::println);
+            Client clients = clientRepository.findClientFetchOrders(1);
+            System.out.println(clients.getOrders().toString());
+
+
+
         };
     }
 

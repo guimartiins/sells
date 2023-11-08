@@ -2,6 +2,8 @@ package io.github.guimartiins.sells.domain.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "client")
 public class Client {
@@ -13,7 +15,20 @@ public class Client {
     @Column(length = 100)
     private String name;
 
-    public Client() {}
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Order> orders;
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Client() {
+    }
+
     public Client(String name) {
         this.name = name;
     }
@@ -36,9 +51,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Client{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }
