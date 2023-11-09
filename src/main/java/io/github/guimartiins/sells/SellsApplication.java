@@ -1,7 +1,6 @@
 package io.github.guimartiins.sells;
 
 import io.github.guimartiins.sells.domain.entity.Client;
-import io.github.guimartiins.sells.domain.entity.Order;
 import io.github.guimartiins.sells.domain.repository.ClientRepository;
 import io.github.guimartiins.sells.domain.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @SpringBootApplication
@@ -24,16 +20,14 @@ public class SellsApplication {
             Client client = new Client("Guilherme");
             clientRepository.save(client);
 
-            Order order = new Order();
-            order.setClient(client);
-            order.setTotal(BigDecimal.valueOf(100));
+//            Order order = new Order();
+//            order.setClient(client);
+//            order.setTotal(BigDecimal.valueOf(100));
+//
+//            orderRepository.save(order);
 
-            orderRepository.save(order);
-
-            Client clients = clientRepository.findClientFetchOrders(1);
-            System.out.println(clients.getOrders().toString());
-
-
+//            Client clients = clientRepository.findClientFetchOrders(1);
+//            System.out.println(clients.getOrders().toString());
 
         };
     }
