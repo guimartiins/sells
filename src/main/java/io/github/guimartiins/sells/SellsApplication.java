@@ -13,25 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 public class SellsApplication {
-
-    @Bean
-    public CommandLineRunner init(@Autowired ClientRepository clientRepository, @Autowired OrderRepository orderRepository) {
-        return args -> {
-            Client client = new Client("Guilherme");
-            clientRepository.save(client);
-
-//            Order order = new Order();
-//            order.setClient(client);
-//            order.setTotal(BigDecimal.valueOf(100));
-//
-//            orderRepository.save(order);
-
-//            Client clients = clientRepository.findClientFetchOrders(1);
-//            System.out.println(clients.getOrders().toString());
-
-        };
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(SellsApplication.class, args);
     }
